@@ -21,7 +21,7 @@
     padding: 10px;
     background: linear-gradient(135deg, #6dd5ed, #2193b0);
     border-radius: 15px;
-    height: calc(var(--folder-H) * 1.7);
+    height: calc(var(--folder-H) * 1.5);
     position: relative;
 }
 
