@@ -1,11 +1,12 @@
-import logo from './logo.svg';
 import './App.css';
 import Upload from './components/templates/Upload.jsx'
 
 function App() {
-  return <>
-    <Upload />
-  </>
+  return (
+    <>
+      <Upload />
+    </>
+  )
 }
 
 export default App;
