@@ -1,7 +1,7 @@
 /* Button.css */
 
 /* Button Styles */
-.button {
+.button-upload {
     position: relative;
     display: inline-flex;
     overflow: hidden;
@@ -12,7 +12,7 @@
     z-index: 10;
 }
 
-.button:focus {
+.button-upload:focus {
     box-shadow:
         0 0 0 2px rgba(148, 163, 184, 1),
         /* focus:ring-2 focus:ring-slate-400 */
@@ -62,7 +62,7 @@
     transition: all 0.3s ease-in-out;
 }
 
-.button:hover .button-content {
+.button-upload:hover .button-content {
     background-color: rgba(15, 23, 42, 0.9);
     /* bg-slate-950/90 */
 }
@@ -90,12 +90,12 @@
     /* text-blue-500 */
 }
 
-.button:hover .left-icon {
+.button-upload:hover .left-icon {
     transform: translateX(-4px);
     /* group-hover:-translate-x-1 */
 }
 
-.button:hover .right-icon {
+.button-upload:hover .right-icon {
     transform: translateX(4px);
     /* group-hover:translate-x-1 */
 }

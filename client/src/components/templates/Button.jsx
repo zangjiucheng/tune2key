@@ -6,7 +6,7 @@ const Button = () => {
     const navigate = useNavigate();
 
     return (
-        <button className="button">
+        <button className="button-upload" onClick={() => {navigate('/upload')}}>
             <span className="spinning-bg" />
             <span className="button-content">
                 <svg
@@ -22,7 +22,7 @@ const Button = () => {
                         strokeLinecap="round"
                     />
                 </svg>
-                <span className="button-text" onClick={() => {navigate('/upload')}}>
+                <span className="button-text" >
                     Upload Now!
                 </span>
                 <svg
