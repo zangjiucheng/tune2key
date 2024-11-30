@@ -1,6 +1,8 @@
 import React from 'react';
 import './UploadPage.css'
 
+import DownloadButton from '../components/templates/buttons/DownloadButton';
+
 const UploadPage = () => {
     return (
         <>
@@ -9,6 +11,7 @@ const UploadPage = () => {
                 </div>
                 <div className="right">
                     hi
+                    <DownloadButton filename={"PERFECT.pdf"}/>
                 </div>
             </div>
         </>

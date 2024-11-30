@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, send_file
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from music_midi import transcribe_audio
 from music_sheet import MUSIC_SHEET
@@ -9,6 +9,8 @@ app = Flask(__name__)
 
 CORS(app)
 
+SHEET_MUSIC_FOLDER = './server/resources/pdf'
+app.config['SHEET_MUSIC_FOLDER'] = SHEET_MUSIC_FOLDER
 
 @app.route('/transcribe', methods=['POST'])
 def transcribe():
@@ -35,6 +37,21 @@ def transcribe():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
     
+
+# Route to download a PDF
+@app.route('/files/pdf/<filename>', methods=['GET'])
+def download_pdf_file(filename):
+    try:
+        # Make sure the file exists
+        file_path = os.path.join(SHEET_MUSIC_FOLDER, filename)
+        if not os.path.exists(file_path):
+            return jsonify({"error": "File not found"}), 404
+        
+        # Send the file to the client
+        return send_from_directory(SHEET_MUSIC_FOLDER, filename, as_attachment=True)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 
 if __name__ == "__main__":  
     app.run(debug=True)
