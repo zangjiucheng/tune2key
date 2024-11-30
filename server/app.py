@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 CORS(app)
 
-SHEET_MUSIC_FOLDER = './server/resources/pdf'
+SHEET_MUSIC_FOLDER = './resources/sheetmusic'
 app.config['SHEET_MUSIC_FOLDER'] = SHEET_MUSIC_FOLDER
 
 @app.route('/transcribe', methods=['POST'])
@@ -38,9 +38,9 @@ def transcribe():
         return jsonify({"error": str(e)}), 500
     
 
-# Route to download a PDF
-@app.route('/files/pdf/<filename>', methods=['GET'])
-def download_pdf_file(filename):
+# filename is the filename with ".pdf" ending
+@app.route('/download/<filename>', methods=['GET'])
+def download(filename):
     try:
         # Make sure the file exists
         file_path = os.path.join(SHEET_MUSIC_FOLDER, filename)

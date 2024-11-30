@@ -8,7 +8,7 @@ import {BoxesCore} from './components/templates/BoxesCore';
 import Header from './components/Header'
 
 function App() {
-  const [inMp3File, setInMp3File] = useState(false); // the mp3 file that user gives
+  const [inMp3File, setInMp3File] = useState(true); // the mp3 file that user gives
 
   const handleUploadSuccess = () => {
     setInMp3File(true); // Update state when upload is successful

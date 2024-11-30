@@ -4,10 +4,9 @@ import './DownloadButton.css'
 
 const DownloadButton = ({filename}) => {
 
-    const downloadFile = () => {
-        const url = `${window.location.origin}/resources/pdf/${filename}`;
-    
-        fetch(url)
+    const downloadFile = async () => {
+        const url = `${window.location.origin}/download/${filename}`;
+        await fetch(url)
             .then(response => {
                 if (response.ok) {
                     return response.blob();  // Convert the response into a Blob (binary data)
@@ -28,11 +27,10 @@ const DownloadButton = ({filename}) => {
             });
     }
 
-
     return (
         <button id="download-button"
             onClick={() => downloadFile()}>
-            Download{console.log(filename, "filename")}
+            Download
         </button>
     );
 }
