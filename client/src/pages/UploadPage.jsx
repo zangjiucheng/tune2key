@@ -1,12 +1,16 @@
 import React from 'react';
-
-import Upload from '../components/templates/Upload';
+import './UploadPage.css'
 
 const UploadPage = () => {
     return (
         <>
-            {console.log("UploadPage")}
-            <Upload />
+            <div className="main">
+                <div className="left">
+                </div>
+                <div className="right">
+                    hi
+                </div>
+            </div>
         </>
     );
 }
