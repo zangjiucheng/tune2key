@@ -430,8 +430,11 @@ $RECYCLE.BIN/
 # Music
 *.mid
 *.mp3
+*.pdf
+*.sf2
 
 # Model
 *.pth
+
 
 # End of https://www.toptal.com/developers/gitignore/api/nextjs,python,node,linux,windows,macos,react
