@@ -1,4 +1,6 @@
 import os
+import shutil
+
 from music_process import *
 
 class TUNE2KEY:
@@ -13,8 +15,8 @@ class TUNE2KEY:
     def upload_file(self, file_path:str) -> None:
         self.file_name = os.path.basename(file_path).split('.')[0]
 
-        self.midi_dir = os.path.join(self.resource_dir, 'midi', f'{self.file_name}.midi')
-        self.music_dir = os.path.join(self.resource_dir, 'audio', f'{self.file_name}.mp3')
+        self.midi_dir = os.path.join(self.resource_dir, 'midi', f'{self.file_name}.mid')
+        self.music_dir = os.path.join(self.resource_dir, 'mp3', f'{self.file_name}.mp3')
         self.music_sheet_dir = os.path.join(self.resource_dir, 'sheet', f'{self.file_name}.pdf')
         
         self.load_file_type(file_path) 
@@ -26,7 +28,7 @@ class TUNE2KEY:
         if ext=='.mp3':
             print('Get mp3 input file, start processing...')
             self.process_mp3(file_path)
-        elif ext=='.midi':
+        elif ext=='.mid':
             print('Get midi input file, start processing...')
             self.process_midi(file_path)
         elif ext=='.pdf':
@@ -37,14 +39,18 @@ class TUNE2KEY:
             raise ValueError(f"Unsupported file type: {ext}")
     
     def process_mp3(self, file_path:str) -> None:
-        os.move(file_path, self.music_dir)
+        shutil.copy(file_path, self.music_dir)
+        shutil.move(file_path, file_path.split('.')[0])
         mp32midi(self.music_dir, self.midi_dir)
         generate_sheet_pdf(self.midi_dir, self.music_sheet_dir)
+        os.remove(file_path.split('.')[0])
         
     def process_midi(self, file_path:str) -> None:
-        os.move(file_path, self.midi_dir)
+        shutil.copy(file_path, self.midi_dir)
+        shutil.move(file_path, file_path.split('.')[0])
         midi2mp3(self.midi_dir)
         generate_sheet_pdf(self.midi_dir, self.music_sheet_dir)
+        os.remove(file_path.split('.')[0])
     
     def process_pdf(self):
         print('Unsupported pdf for now')

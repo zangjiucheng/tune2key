@@ -13,7 +13,7 @@ TUNE2KEY_obj = TUNE2KEY()
 
 base_path = os.path.join(os.path.dirname(__file__), 'resources')
 
-@app.route('/transcribe', methods=['POST'])
+@app.route('/upload', methods=['POST'])
 def transcribe():
     if 'file' not in request.files:
         return jsonify({"error": "No file provided"}), 400
@@ -27,9 +27,30 @@ def transcribe():
         uploaded_file.save(upload_file_path)
 
         TUNE2KEY_obj.upload_file(upload_file_path)
+        return jsonify({"success": True}), 200
 
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return jsonify({"error": str(e)}), 500 
+    
+@app.route('/process/status/<name>', methods=['GET'])
+def process_status(name):
+    upload_file_path = os.path.join(base_path, 'upload', name)
+    midi_file_path = os.path.join(base_path, 'midi', f'{name}.mid')
+    sheet_file_path = os.path.join(base_path, 'sheet', f'{name}.pdf')
+    mp3_file_path = os.path.join(base_path, 'mp3', f'{name}.mp3')
+    
+    status = {
+    "midi": os.path.exists(midi_file_path),
+    "sheet": os.path.exists(sheet_file_path),
+    "mp3": os.path.exists(mp3_file_path)
+    }
+
+    if all(status.values()):
+        return jsonify({"status": "done"}), 200
+    elif os.path.exists(upload_file_path):
+        return jsonify({"status": "processing"}), 200
+    else:
+        return jsonify({"status": "not_found"}), 404
 
 @app.route('/music_sheet/<name>', methods=['GET'])
 def music_sheet(name):
@@ -37,7 +58,7 @@ def music_sheet(name):
 
 @app.route('/audio/<name>', methods=['GET'])
 def audio(name):
-    return os.path.join(base_path, 'audio', f'{name}.mp3')
+    return os.path.join(base_path, 'mp3', f'{name}.mp3')
 
 if __name__ == "__main__":  
     app.run(debug=True)
