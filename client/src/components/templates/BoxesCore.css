@@ -1,0 +1,36 @@
+.root-div {
+    position: absolute;
+    left: 25%;
+    padding: 1rem;
+    top: -25%;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    transform: translate(-40%, -60%) skewX(-48deg) skewY(14deg) scale(0.675) rotate(0deg) translateZ(0);
+}
+
+.row-div {
+    width: 4rem;
+    height: 2rem;
+    border-left: 1px solid #64748b;
+    position: relative;
+}
+
+.col-div {
+    width: 4rem;
+    height: 2rem;
+    border-right: 1px solid #64748b;
+    border-top: 1px solid #64748b;
+    position: relative;
+}
+
+.svg-icon {
+    position: absolute;
+    height: 1.5rem;
+    width: 2.5rem;
+    top: -14px;
+    left: -22px;
+    color: #64748b;
+    pointer-events: none;
+}
