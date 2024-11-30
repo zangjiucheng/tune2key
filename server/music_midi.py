@@ -1,10 +1,11 @@
 from piano_transcription_inference import PianoTranscription, sample_rate, load_audio
 import os
 
-resource_path = 'resources'
+# resource_path = 'resources'
 
-file = 'PERFECT.mp3'
-file_path = os.path.join(resource_path, file)
+# file = 'PERFECT.mp3'
+# file_path = os.path.join(resource_path, file)
+file_path='./resources/audios/'
 
 # Load audio
 (audio, _) = load_audio(file_path, sr=sample_rate, mono=True)

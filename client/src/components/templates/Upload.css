@@ -1,0 +1,35 @@
+.input-div {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid rgb(1, 235, 252);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: box-shadow 0.2s ease-in-out;
+}
+.input-div:hover {
+    box-shadow: 0px 0px 50px rgba(1, 235, 252, 0.5),
+        inset 0px 0px 10px rgb(1, 235, 252), 0px 0px 5px rgb(255, 255, 255);
+}
+
+.icon {
+    color: rgb(1, 235, 252);
+    font-size: 2rem;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+.icon:hover {
+    color: rgb(255, 255, 255);
+}
+
+.input {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer !important;
+}
+
