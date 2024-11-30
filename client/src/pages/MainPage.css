@@ -46,8 +46,10 @@
 
 .main-paragraph {
     text-align: center;
+    width: 75%;
     margin-top: 0.5rem;
-    font-size: 18px;
+    font-size: 20px;
+    font-weight: 400;
     /* Equivalent to mt-2 */
     color: #d1d5db;
     /* Equivalent to text-neutral-300 */
