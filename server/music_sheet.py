@@ -14,6 +14,12 @@ class MUSIC_SHEET:
         if ext=='.mp3':
             print('mp3 type')
             self.process_mp3()
+        if ext=='.midi':
+            print('midi type')
+            self.process_midi()
+        if ext=='.pdf':
+            print('pdf type')
+            self.process_pdf()
         else:
             print('wrong type')
             raise ValueError(f"Unsupported file type: {ext}")
@@ -21,3 +27,9 @@ class MUSIC_SHEET:
     
     def process_mp3(self):
         self.transcribed_path = transcribe_audio(self.file_path)
+    def process_midi(self):
+        #do smt
+        print('hi')
+    def process_pdf(self):
+        #do smt
+        print('hi')
