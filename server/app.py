@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify, send_file
 from flask_cors import CORS
 from music_midi import transcribe_audio
+from music_sheet import MUSIC_SHEET
 import os
 
 
@@ -22,7 +23,10 @@ def transcribe():
         audio_dir=os.path.join(os.path.dirname(__file__), 'resources', 'audios')
         audio_file_path=os.path.join(audio_dir, uploaded_file.filename)
         uploaded_file.save(audio_file_path)
-        print('uploaded_file2')
+
+        # create music_sheet class
+        music_sheet = MUSIC_SHEET(audio_file_path)
+        
         midi_path = transcribe_audio(audio_file_path)
         print(midi_path)
 

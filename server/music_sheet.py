@@ -12,7 +12,12 @@ class MUSIC_SHEET:
         ext = ext.lower()
         
         if ext=='.mp3':
+            print('mp3 type')
             self.process_mp3()
+        else:
+            print('wrong type')
+            raise ValueError(f"Unsupported file type: {ext}")
+        return self.transcribed_path
     
     def process_mp3(self):
         self.transcribed_path = transcribe_audio(self.file_path)
