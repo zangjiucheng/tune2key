@@ -1,10 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
-import Upload from './components/templates/Upload.jsx'
+import Main from './components/Main'
 
 function App() {
   return <>
-    <Upload />
+    <Main />
+
   </>
 }
 

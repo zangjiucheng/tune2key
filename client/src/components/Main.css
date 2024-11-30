@@ -1,0 +1,30 @@
+.main {
+    position: fixed;
+    bottom: 8%;
+    left: 4%;
+    right: 4%;
+    width: 92%;
+    height: 80%;
+    box-sizing: border-box;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    
+}
+.left {
+    width: 60%;
+    height: 100%;
+    box-sizing: border-box;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.right {
+    width: 40%;
+    height: 100%;
+    box-sizing: border-box;
+    border: 1px solid black
+}

@@ -33,3 +33,5 @@ class MUSIC_SHEET:
     def process_pdf(self):
         #do smt
         print('hi')
+    def get_transcribed_path(self):
+        return self.transcribed_path

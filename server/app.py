@@ -26,7 +26,8 @@ def transcribe():
 
         # create music_sheet class
         music_sheet = MUSIC_SHEET(audio_file_path)
-        
+        print(music_sheet.transcribed_path)
+
         midi_path = transcribe_audio(audio_file_path)
         print(midi_path)
 
