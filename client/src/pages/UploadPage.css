@@ -6,7 +6,6 @@
     width: 92%;
     height: 75%;
     box-sizing: border-box;
-    border: 1px solid white;
     display: flex;
     flex-direction: row;
     z-index: 10;
@@ -16,7 +15,6 @@
     width: 60%;
     height: 100%;
     box-sizing: border-box;
-    border: 1px solid white;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -32,21 +30,25 @@
     border: 1px solid white;
     padding: 2rem;
     gap: 0.8rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white
+}
+.right p {
+    font-weight: 500;
+    font-size: 30px;
 }
 
-.play {
-    flex: 0.2;
-    background-color: pink;
+.displayTime {
+    text-align: center;
 }
 
 .demos {
-    flex: 0.65;
-    background-color: greenyellow;
+    flex: 0.6;
     overflow-y: auto;
 }
 
 .buttons {
-    flex: 0.15;
+    flex: 0.1;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -106,4 +108,51 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.slider {
+    /* slider */
+    width: 100%;
+    --slider-width: 60%;
+    --slider-height: 6px;
+    --slider-bg: rgb(82, 82, 82);
+    --slider-border-radius: 999px;
+    /* level */
+    --level-color: #fff;
+    --level-transition-duration: .1s;
+    /* icon */
+    --icon-margin: 15px;
+    --icon-color: var(--slider-bg);
+    --icon-size: 25px;
+    
+    display: flex;
+    justify-content: center;
+}
+
+.slider .level {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: var(--slider-width);
+    height: var(--slider-height);
+    background: var(--slider-bg);
+    overflow: hidden;
+    border-radius: var(--slider-border-radius);
+    -webkit-transition: height var(--level-transition-duration);
+    -o-transition: height var(--level-transition-duration);
+    transition: height var(--level-transition-duration);
+    cursor: inherit;
+}
+
+.slider .level::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 0;
+    height: 0;
+    -webkit-box-shadow: -200px 0 0 200px var(--level-color);
+    box-shadow: -200px 0 0 200px var(--level-color);
+}
+
+.slider:hover .level {
+    height: calc(var(--slider-height) * 2);
+    cursor: pointer;
 }

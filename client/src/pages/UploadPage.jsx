@@ -157,8 +157,9 @@ const UploadPage = () => {
                     )}
                 </div>
                 <div className="right">
-                    <div className="play">
-                        {audioUrl ? (
+
+                    {audioUrl ? (
+                        <div className="audio-section">
                             <div className="audio-player" onChange={() => { handlePlayPause(); console.log('playing') }}>
                                 <audio
                                     ref={audioRef}
@@ -167,32 +168,36 @@ const UploadPage = () => {
                                     onLoadedMetadata={handleLoadedMetadata}
                                 />
                                 <MyToggleButton />
-
-                                {/* Scroll Bar */}
+                            </div>
+                            {/* Scroll Bar */}
+                            <div className="slider">
                                 <input
                                     type="range"
+                                    className="level"
                                     min="0"
                                     max={duration || 0} // Prevent NaN if duration is not loaded
                                     value={currentTime}
-                                    onChange={handleSeek}
-                                />
-
-                                {/* Display Current Time and Duration */}
-                                <div>
-                                    <span>{formatTime(currentTime)}</span> / <span>{formatTime(duration)}</span>
-                                </div>
+                                    onChange={handleSeek} />
                             </div>
-                        ) : (
-                            <p>Loading Audio...</p>
-                        )}
-                    </div>
-                    <div className="demos">
-                    </div>
-                    <div className="buttons">
-                        <DownloadButton inputFilename={inputFilename} className="left-button" />
-                        <DownloadButton inputFilename={inputFilename} className="right-button" />
-                    </div>
+
+                            {/* Display Current Time and Duration */}
+                            <div className="displayTime">
+                                <span>{formatTime(currentTime)}</span> / <span>{formatTime(duration)}</span>
+                            </div>
+                            <div className="demos">
+                            </div>
+                            <div className="buttons">
+                                <DownloadButton inputFilename={inputFilename} className="left-button" />
+                                <DownloadButton inputFilename={inputFilename} className="right-button" />
+                            </div>
+
+                        </div>
+
+                    ) : (
+                        <p>Upload Something First!</p>
+                    )}
                 </div>
+
             </div>
         </>
     );
