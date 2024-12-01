@@ -10,6 +10,8 @@ app = Flask(__name__)
 
 CORS(app)
 
+TUNE2KEY_obj = TUNE2KEY()
+base_path = os.path.join(os.path.dirname(__file__), 'resources')
 
 @app.route('/upload', methods=['POST'])
 def transcribe():
