@@ -171,7 +171,7 @@ const UploadPage = ({ handleUploadSuccess }) => {
                         </div>
 
                     ) : (
-                        <p>Loading Audio...</p>
+                        <p>Upload Something First!</p>
                     )}
                 </div>
             </div>

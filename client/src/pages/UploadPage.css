@@ -6,7 +6,6 @@
     width: 92%;
     height: 75%;
     box-sizing: border-box;
-    border: 1px solid white;
     display: flex;
     flex-direction: row;
     z-index: 10;
@@ -16,11 +15,9 @@
     width: 60%;
     height: 100%;
     box-sizing: border-box;
-    border: 1px solid white;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(0, 0, 0, 0.05);
 }
 
 .right {
@@ -28,6 +25,16 @@
     height: 100%;
     box-sizing: border-box;
     border: 1px solid white;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.right p {
+    font-weight: 500;
+    font-size: 30px;
+    
 }
 
 /* From Uiverse.io by csemszepp */
