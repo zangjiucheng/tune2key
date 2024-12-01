@@ -17,7 +17,7 @@ const UploadPage = ({mp3Filename}) => {
                 <div className="left">
                 </div>
                 <div className="right">
-                    <DownloadButton filename={filename+".pdf"}/> // download pdf
+                    <DownloadButton filename={filename+".pdf"}/>
                 </div>
             </div>
         </>
