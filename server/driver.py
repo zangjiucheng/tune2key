@@ -5,9 +5,10 @@
 
 from music_process import *
 
-file_name = "Two Steps From Hell - Victory (Piano Version)"
+file_name = "ROSÉ & Bruno Mars - APT"
 
 # simplify_midi(f"resources/midi/{file_name}.mid", f"resources/simple_sheet/{file_name}.mid")
 # generate_sheet_pdf(f"resources/simple_sheet/{file_name}.mid", f"resources/simple_sheet/{file_name}.pdf")
 
-midi2mp3(f"resources/midi/{file_name}.mid", f"resources/mp3/{file_name}.mp3")
+# midi2mp3(f"resources/midi/{file_name}.mid", f"resources/mp3/{file_name}.mp3")
+midi2mp3(f"resources/simple_sheet/{file_name}.mid", f"resources/simple_sheet/{file_name}.mp3")
