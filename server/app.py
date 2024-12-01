@@ -34,9 +34,11 @@ def transcribe():
         def process_file():
             TUNE2KEY_obj.upload_file(upload_file_path)
 
-        thread = Thread(target=process_file)
-        thread.daemon = True
-        thread.start()
+        process_file() # Run without threading
+        
+        # thread = Thread(target=process_file)
+        # thread.daemon = True
+        # thread.start()
         return jsonify({"success": True,
                         "filename": uploaded_file.filename.split('.')[0]
                         }), 200
