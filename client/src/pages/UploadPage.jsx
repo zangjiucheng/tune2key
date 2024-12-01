@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Upload2 from '../components/templates/Upload2';
 import DownloadButton from '../components/templates/buttons/DownloadButton';
+import EasyDifficultyButton from '../components/templates/buttons/EasyDifficultyButton';
 import MyToggleButton from '../components/templates/MyToggleButton';
 import './UploadPage.css';
 import Demos from '../components/templates/Demos';
@@ -199,7 +200,7 @@ const UploadPage = () => {
                             </div>
                             <div className="buttons">
                                 <DownloadButton inputFilename={inputFilename} className="left-button" />
-                                <DownloadButton inputFilename={inputFilename} className="right-button" />
+                                <EasyDifficultyButton filename={inputFilename} download_pdf={download_pdf} className="right-button" />
                             </div>
 
                         </div>
