@@ -8,9 +8,9 @@ const Demos = ({ setInputFilename, setUploaded, download_pdf, download_mp3 }) =>
         if (demoNumber === 1) {
             filename = "ROSÉ & Bruno Mars - APT";
         } else if (demoNumber === 2) {
-            filename = "Two Steps From Hell - Victory (Piano Version).pdf";
+            filename = "Two Steps From Hell - Star Sky (Piano Version)";
         } else if (demoNumber === 3) {
-            filename = "Dennis Kuo - Track in Time - Piano Cover (Tutorial)";
+            filename = "PERFECT - ED SHEERAN (Piano Solo Cover) with a La La Land twist - The Piano Guys";
         } else {
             console.warn("this isn't a proper demo number");
             return;
@@ -39,7 +39,7 @@ const Demos = ({ setInputFilename, setUploaded, download_pdf, download_mp3 }) =>
             </div>
             <div className="song-item">
                 <div className="song-info">
-                    <h2>Victory</h2>
+                    <h2>Star Sky</h2>
                     <p>Two Steps From Hell</p>
                 </div>
                 <button className="play-button" onClick={() => setDemoNumber(2)}>▶</button>
@@ -47,8 +47,8 @@ const Demos = ({ setInputFilename, setUploaded, download_pdf, download_mp3 }) =>
 
             <div className="song-item">
                 <div className="song-info">
-                    <h2>Track in Time</h2>
-                    <p>Dennis Kuo</p>
+                    <h2>Perfect</h2>
+                    <p>Ed Sheeran</p>
                 </div>
                 <button className="play-button" onClick={() => setDemoNumber(3)}>▶</button>
             </div>
