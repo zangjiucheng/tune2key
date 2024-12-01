@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './UploadPage.css'
 import Upload2 from '../components/templates/Upload2';
 
-const UploadPage = ( { handleUploadSuccess } ) => {
+import DownloadButton from '../components/templates/buttons/DownloadButton';
+
+const UploadPage = ({mp3Filename}) => {
+    const [filename, setFilename] = useState();
+
+    // get rid of mp3Filename file extension
+    useEffect(() => {
+        setFilename(mp3Filename.split('.')[0]);
+    }, [])
+
     return (
         <>
             <div className="main">
@@ -10,7 +19,7 @@ const UploadPage = ( { handleUploadSuccess } ) => {
                     <Upload2 onUploadSuccess={handleUploadSuccess} />
                 </div>
                 <div className="right">
-                    hi
+                    <DownloadButton filename={filename+".pdf"}/>
                 </div>
             </div>
         </>
