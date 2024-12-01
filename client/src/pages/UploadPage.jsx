@@ -142,29 +142,34 @@ const UploadPage = ({ handleUploadSuccess }) => {
                 </div>
                 <div className="right">
                     {audioUrl ? (
-                        <div className="audio-player" onChange={() => { handlePlayPause(); console.log('playing') }}>
-                            <audio
-                                ref={audioRef}
-                                src={audioUrl}
-                                onTimeUpdate={handleTimeUpdate}
-                                onLoadedMetadata={handleLoadedMetadata} 
+                        <div className="audio-section">
+                            <div className="audio-player" onChange={() => { handlePlayPause(); console.log('playing') }}>
+                                <audio
+                                    ref={audioRef}
+                                    src={audioUrl}
+                                    onTimeUpdate={handleTimeUpdate}
+                                    onLoadedMetadata={handleLoadedMetadata}
                                 />
-                            <MyToggleButton />
-
+                                <MyToggleButton />
+                            </div>
                             {/* Scroll Bar */}
-                            <input
-                                type="range"
-                                min="0"
-                                max={duration || 0} // Prevent NaN if duration is not loaded
-                                value={currentTime}
-                                onChange={handleSeek}
-                            />
+                            <div className="slider">
+                                <input
+                                    type="range"
+                                    className="level"
+                                    min="0"
+                                    max={duration || 0} // Prevent NaN if duration is not loaded
+                                    value={currentTime}
+                                    onChange={handleSeek} />
+                            </div>
 
                             {/* Display Current Time and Duration */}
-                            <div>
+                            <div className="displayTime">
                                 <span>{formatTime(currentTime)}</span> / <span>{formatTime(duration)}</span>
                             </div>
+
                         </div>
+
                     ) : (
                         <p>Loading Audio...</p>
                     )}

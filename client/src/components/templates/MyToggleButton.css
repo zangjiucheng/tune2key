@@ -11,6 +11,7 @@
     font-size: var(--size);
     user-select: none;
     fill: var(--color);
+    height: 30px;
 }
 
 .container .play {
