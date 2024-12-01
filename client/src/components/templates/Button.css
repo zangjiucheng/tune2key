@@ -1,0 +1,112 @@
+/* Button.css */
+
+/* Button Styles */
+.button-upload {
+    position: relative;
+    display: inline-flex;
+    overflow: hidden;
+    border-radius: 9999px;
+    /* Full border radius */
+    padding: 2px;
+    outline: none;
+    z-index: 10;
+}
+
+.button-upload:focus {
+    box-shadow:
+        0 0 0 2px rgba(148, 163, 184, 1),
+        /* focus:ring-2 focus:ring-slate-400 */
+        0 0 0 4px rgba(248, 250, 252, 1);
+    /* focus:ring-offset-2 focus:ring-offset-slate-50 */
+    outline-offset: 2px;
+}
+
+.spinning-bg {
+    position: absolute;
+    top: -1000%;
+    right: -1000%;
+    bottom: -1000%;
+    left: -1000%;
+    background: linear-gradient(to right, #ec4899, #8b5cf6, #3b82f6);
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.button-content {
+    display: inline-flex;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    background-color: #0f172a;
+    /* bg-slate-950 */
+    padding: 15px 40px;
+    /* py-3 px-8 */
+    font-size: 0.875rem;
+    /* text-sm */
+    font-weight: 500;
+    /* font-medium */
+    backdrop-filter: blur(24px);
+    /* backdrop-blur-3xl */
+    transition: all 0.3s ease-in-out;
+}
+
+.button-upload:hover .button-content {
+    background-color: rgba(15, 23, 42, 0.9);
+    /* bg-slate-950/90 */
+}
+
+.left-icon,
+.right-icon {
+    height: 1.5rem;
+    /* h-5 */
+    width: 1.5rem;
+    /* w-5 */
+    color: #ec4899;
+    /* text-pink-500 */
+    transition: transform 0.3s ease-in-out;
+}
+
+.left-icon {
+    margin-right: 0.5rem;
+    /* mr-2 */
+}
+
+.right-icon {
+    margin-left: 0.5rem;
+    /* ml-2 */
+    color: #3b82f6;
+    /* text-blue-500 */
+}
+
+.button-upload:hover .left-icon {
+    transform: translateX(-4px);
+    /* group-hover:-translate-x-1 */
+}
+
+.button-upload:hover .right-icon {
+    transform: translateX(4px);
+    /* group-hover:translate-x-1 */
+}
+
+.button-text {
+    position: relative;
+    background: linear-gradient(to right, #ec4899, #8b5cf6, #3b82f6);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    font-weight: 600;
+    font-size: 25px;
+    /* font-semibold */
+}

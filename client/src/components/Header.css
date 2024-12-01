@@ -1,0 +1,11 @@
+.logo {
+    position: fixed;
+    top: -20px;
+    left: 20px;
+    height: 200px;
+    width: auto;
+    z-index: 10;
+}
+.logo:hover {
+    cursor: pointer;
+}

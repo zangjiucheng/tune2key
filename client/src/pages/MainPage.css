@@ -13,21 +13,15 @@
     /* Equivalent to rounded-lg */
 }
 
-.overlay {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #0f172a;
-    z-index: 20;
-    mask-image: radial-gradient(transparent, white);
-    pointer-events: none;
-}
+
 .main-content {
     margin-top: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
+    gap: 20px;
+
 }
 
 .main-heading {
@@ -45,8 +39,10 @@
 
 .main-paragraph {
     text-align: center;
+    width: 75%;
     margin-top: 0.5rem;
-    font-size: 18px;
+    font-size: 20px;
+    font-weight: 400;
     /* Equivalent to mt-2 */
     color: #d1d5db;
     /* Equivalent to text-neutral-300 */
