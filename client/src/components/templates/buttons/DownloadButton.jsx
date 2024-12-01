@@ -5,7 +5,7 @@ import './DownloadButton.css'
 const DownloadButton = ({filename}) => {
 
     const downloadFile = async () => {
-        const url = `${window.location.origin}/download/${filename}`;
+        const url = `http://127.0.0.1:5000/download/${filename}`;
         await fetch(url)
             .then(response => {
                 if (response.ok) {

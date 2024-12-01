@@ -1,11 +1,12 @@
 import React from 'react';
 import './Upload2.css'
 
-const Upload2 = ({ handleUploadChange }) => {
-
+const Upload2 = ({ setInMp3Filename }) => {
 
     const handleFileChange = (e) => {
         const uploadedFile = e.target.files[0]
+        setInMp3Filename(uploadedFile.name);
+        console.log(uploadedFile.name, "uploadedFile.name");
         const formData = new FormData()
         formData.append('file', uploadedFile)
         transcribe(formData)
@@ -18,10 +19,10 @@ const Upload2 = ({ handleUploadChange }) => {
             })
             if (response.ok) {
                 console.log('ok')
-                handleUploadChange()
             }
         }
         catch (err) {
+            setInMp3Filename(null);
             console.log('err')
         }
     }
