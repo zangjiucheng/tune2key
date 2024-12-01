@@ -12,9 +12,9 @@ CORS(app)
 
 TUNE2KEY_obj = TUNE2KEY()
 SHEET_MUSIC_FOLDER='./resources/sheet'
-SIMPLE='./resources/simple'
+SIMPLE='./resources/simple_sheet'
 AUDIO_FOLDER = './resources/mp3'
-HARDER = './resources/harder'
+HARDER = './resources/harder_sheet'
 
 base_path = os.path.join(os.path.dirname(__file__), 'resources')
 
@@ -37,7 +37,9 @@ def transcribe():
         thread = Thread(target=process_file)
         thread.daemon = True
         thread.start()
-        return jsonify({"success": True}), 200
+        return jsonify({"success": True,
+                        "filename": uploaded_file.filename.split('.')[0]
+                        }), 200
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500 
