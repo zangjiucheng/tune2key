@@ -9,21 +9,21 @@ const DownloadButton = ({filename}) => {
         await fetch(url)
             .then(response => {
                 if (response.ok) {
-                    return response.blob();  // Convert the response into a Blob (binary data)
+                    return response.blob();
                 }
                 throw new Error('File not found');
             })
             .then(blob => {
-                const downloadUrl = window.URL.createObjectURL(blob);  // Create a URL for the Blob
-                const a = document.createElement('a');  // Create an anchor element
+                const downloadUrl = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
                 a.href = downloadUrl;
-                a.download = filename;  // Set the download filename
+                a.download = filename;
                 document.body.appendChild(a);
-                a.click();  // Trigger the download
-                a.remove();  // Clean up the DOM
+                a.click();
+                a.remove();
             })
             .catch(error => {
-                console.error('Error:', error);  // Handle any errors (file not found, etc.)
+                console.error('Error:', error);
             });
     }
 
