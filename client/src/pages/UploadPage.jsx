@@ -4,6 +4,7 @@ import DownloadButton from '../components/templates/buttons/DownloadButton';
 import MyToggleButton from '../components/templates/MyToggleButton';
 import './UploadPage.css';
 import Demos from '../components/templates/Demos';
+import Loader from '../components/templates/Loader';
 
 const UploadPage = () => {
     const [uploaded, setUploaded] = useState(false);
@@ -13,7 +14,8 @@ const UploadPage = () => {
     const [currentTime, setCurrentTime] = useState(0);
     const [duration, setDuration] = useState(0);
     const [inputFilename, setInputFilename] = useState(null);
-
+    const [fileName, setFileName] = useState(null);
+    const [loader, setLoader] = useState(false);
     const audioRef = useRef(null);
     const handleFileChange = (e) => {
         const uploadedFile = e.target.files[0]
@@ -37,14 +39,19 @@ const UploadPage = () => {
     };
 
     const transcribe = async (formData) => {
-        setUploaded(true); // Set uploaded to true
+        setLoader(true);
         try {
-            const response = await fetch('http://127.0.0.1:5000/transcribe', {
+            const response = await fetch('http://127.0.0.1:5000/upload', {
                 method: 'POST',
                 body: formData,
             });
             if (response.ok) {
                 console.log('ok');
+                const data = await response.json();
+                console.log(data);
+                setLoader(false)
+                setFileName(data.filename);
+
                 setUploaded(true); // Set uploaded to true
             }
         } catch (err) {
@@ -54,7 +61,7 @@ const UploadPage = () => {
 
     const download_pdf = async () => {
         try {
-            const response = await fetch('http://127.0.0.1:5000/download/sample.pdf');
+            const response = await fetch(`http://127.0.0.1:5000/download/${fileName}.pdf`);
             if (response.ok) {
                 const blob = await response.blob();
                 const url = URL.createObjectURL(blob);
@@ -68,7 +75,7 @@ const UploadPage = () => {
     };
     const download_mp3 = async () => {
         try {
-            const response = await fetch('http://127.0.0.1:5000/download/PERFECT.mp3');
+            const response = await fetch(`http://127.0.0.1:5000/download/${fileName}.mp3`);
             if (response.ok) {
                 const blob = await response.blob();
                 const url = URL.createObjectURL(blob);
@@ -117,7 +124,8 @@ const UploadPage = () => {
         <>
             <div className="main">
                 <div className="left">
-                    {!uploaded ? (
+                    {!uploaded ? 
+                        !loader? (
                         // Show upload button when not uploaded
                         <label htmlFor="file" className="custum-file-upload">
                             <div className="icon">
@@ -143,7 +151,7 @@ const UploadPage = () => {
                             </div>
                             <input id="file" type="file" onChange={handleFileChange} />
                         </label>
-                    ) : pdfUrl ? (
+                    ): <Loader /> : pdfUrl ? (
                         // Display the PDF when uploaded and pdfUrl is available
                         <iframe
                             src={pdfUrl}
