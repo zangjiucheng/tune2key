@@ -178,7 +178,6 @@ const UploadPage = () => {
                                 />
                                 <MyToggleButton />
                             </div>
-                            {/* Scroll Bar */}
                             <div className="slider">
                                 <input
                                     type="range"
@@ -189,7 +188,6 @@ const UploadPage = () => {
                                     onChange={handleSeek} />
                             </div>
 
-                            {/* Display Current Time and Duration */}
                             <div className="displayTime">
                                 <span>{formatTime(currentTime)}</span> / <span>{formatTime(duration)}</span>
                             </div>
