@@ -1,6 +1,6 @@
 # TUNE2KEY
 
-*TUNE2KEY* is an **innovative platform that transforms audio, MIDI, or PDF files into beautifully rendered sheet music**. (For the expert situation, achieved an onset [F1 score of 96.72%](https://arxiv.org/pdf/2010.01815), surpassing the previous state-of-the-art Onsets and Frames system, which scored 94.80%.) Whether you're a **beginner looking to simplify a piece** or **an expert aiming for a challenge, our AI-powered tool** adjusts difficulty levels to match your needs. Perfect for musicians of all skill level*s, TUNE2KEY makes music creation and customization effortless.
+*TUNE2KEY* is an **innovative platform that transforms audio, MIDI, and PDF files into beautifully rendered sheet music**. (For the expert situation, achieved an onset [F1 score of 96.72%](https://arxiv.org/pdf/2010.01815), surpassing the previous state-of-the-art Onsets and Frames system, which scored 94.80%). Whether you're a **beginner looking to simplify a piece** or **an expert aiming for a challenge, our AI-powered tool** adjusts difficulty levels to match your needs. Perfect for musicians of all skill levels, TUNE2KEY makes music creation and customization effortless.
 
 ![TUNE2KEY](demo.png)
 
@@ -37,7 +37,7 @@
     ```
     If MuseScore is not installed, download it from the [Download Link](https://musescore.org/en/download/musescore.dmg).
 
-## Usagege
+## Usage
 
 ### Running the Server
 
