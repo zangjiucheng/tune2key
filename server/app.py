@@ -12,7 +12,9 @@ CORS(app)
 
 TUNE2KEY_obj = TUNE2KEY()
 SHEET_MUSIC_FOLDER='./resources/sheet'
+SIMPLE='./resources/simple_sheet'
 AUDIO_FOLDER = './resources/mp3'
+HARDER = './resources/harder_sheet'
 
 base_path = os.path.join(os.path.dirname(__file__), 'resources')
 
@@ -35,7 +37,9 @@ def transcribe():
         thread = Thread(target=process_file)
         thread.daemon = True
         thread.start()
-        return jsonify({"success": True}), 200
+        return jsonify({"success": True,
+                        "filename": uploaded_file.filename.split('.')[0]
+                        }), 200
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500 
@@ -93,8 +97,20 @@ def make_harder():
 @app.route('/download/<filename>', methods=['GET'])
 def download(filename):
     try:
+        if filename.lower().endswith('simple.pdf'):
+            folder= SIMPLE
+            mimetype='application/pdf'
+        elif filename.lower().endswith('simple.mp3'):
+            folder=SIMPLE
+            mimetype='audio/mpeg'
+        elif filename.lower().endswith('harder.pdf'):
+            folder=HARDER
+            mimetype='application/pdf'
+        elif filename.lower().endswith('harder.mp3'):
+            folder=HARDER
+            mimetype='application/pdf'
         # Make sure the file exists
-        if filename.lower().endswith('.pdf'):
+        elif filename.lower().endswith('.pdf'):
             folder = SHEET_MUSIC_FOLDER
             mimetype = 'application/pdf'
         elif filename.lower().endswith('.mp3'):
