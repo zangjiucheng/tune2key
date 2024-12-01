@@ -4,6 +4,7 @@ from flask import Flask, request, jsonify, send_file
 from flask_cors import CORS
 
 from Tune2key import TUNE2KEY
+from threading import Thread
 
 app = Flask(__name__)
 
@@ -26,7 +27,12 @@ def transcribe():
         upload_file_path=os.path.join(base_path, 'upload', uploaded_file.filename)
         uploaded_file.save(upload_file_path)
 
-        TUNE2KEY_obj.upload_file(upload_file_path)
+        def process_file():
+            TUNE2KEY_obj.upload_file(upload_file_path)
+
+        thread = Thread(target=process_file)
+        thread.daemon = True
+        thread.start()
         return jsonify({"success": True}), 200
 
     except Exception as e:
