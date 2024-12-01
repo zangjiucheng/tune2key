@@ -32,7 +32,9 @@ def transcribe():
         thread = Thread(target=process_file)
         thread.daemon = True
         thread.start()
-        return jsonify({"success": True}), 200
+        return jsonify({"success": True,
+                        "filename": uploaded_file.filename.split('.')[0]
+                        }), 200
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500 
@@ -56,14 +58,6 @@ def process_status(name):
         return jsonify({"status": "processing"}), 200
     else:
         return jsonify({"status": "not_found"}), 404
-
-@app.route('/music_sheet/<name>', methods=['GET'])
-def music_sheet(name):
-    return os.path.join(base_path, 'sheet', f'{name}.pdf')
-
-@app.route('/audio/<name>', methods=['GET'])
-def audio(name):
-    return os.path.join(base_path, 'mp3', f'{name}.mp3')
 
 if __name__ == "__main__":  
     app.run(debug=True)
