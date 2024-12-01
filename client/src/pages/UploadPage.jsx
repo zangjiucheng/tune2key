@@ -186,7 +186,7 @@ const UploadPage = () => {
                                 <span>{formatTime(currentTime)}</span> / <span>{formatTime(duration)}</span>
                             </div>
                             <div className="demos">
-                                <Demos setUploaded={setUploaded}/>
+                                <Demos setUploaded={setUploaded} download_pdf={download_pdf} download_mp3={download_mp3}/>
                             </div>
                             <div className="buttons">
                                 <DownloadButton inputFilename={inputFilename} className="left-button" />
