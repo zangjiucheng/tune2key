@@ -196,7 +196,10 @@ const UploadPage = () => {
                         </div>
 
                     ) : (
-                        <p>Upload Something First!</p>
+                        <>
+                            <p>Don't have anything to upload? Play a demo!</p>
+                            <Demos setUploaded={setUploaded} download_pdf={download_pdf} download_mp3={download_mp3}/>
+                        </>
                     )}
                 </div>
 
