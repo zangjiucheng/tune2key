@@ -34,7 +34,29 @@ def transcribe():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-    
+
+@app.route('/make-harder', methods=['POST'])
+def make_harder():
+    # Get the parameters from the request
+    difficulty_increase = float(request.form.get('difficulty_increase', 1.0))
+    ornamentation = int(request.form.get('ornamentation', 0))
+    midi_file = request.files['midi_file']
+
+    # Save the uploaded MIDI file
+    original_filename = midi_file.filename
+    midi_path = os.path.join(MIDI_DIR, original_filename)
+    midi_file.save(midi_path)
+
+    # Call the function to make the music harder
+    new_midi_filename = make_music_harder(
+        difficulty_increase,
+        ornamentation,
+        midi_path
+    )
+
+    return f"New MIDI file created: {new_midi_filename}"
+
+
 
 if __name__ == "__main__":  
     app.run(debug=True)
