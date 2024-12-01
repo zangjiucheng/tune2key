@@ -2,15 +2,15 @@ import React from 'react';
 
 import './DownloadButton.css'
 
-const EasyDifficultyButton = ({download_pdf, filename}) => {
+const EasyDifficultyButton = ({download_pdf, download_mp3, filename}) => {
 
     const makeEasier = () => {
         console.log("input filename " + filename)
         try {
             const simpleFilename = filename + '_simple'
             download_pdf(simpleFilename);
-            console.debug("made " + simpleFilename + " easier and set the pdf again.");
-
+            download_mp3(simpleFilename);
+            console.debug("made " + simpleFilename + " easier and set the pdf and audio file again.");
         } catch (e) {
             console.warn("in EasyDifficultyButton:" + e);
         }

@@ -200,7 +200,7 @@ const UploadPage = () => {
                             </div>
                             <div className="buttons">
                                 <DownloadButton inputFilename={inputFilename} className="left-button" />
-                                <EasyDifficultyButton filename={inputFilename} download_pdf={download_pdf} className="right-button" />
+                                <EasyDifficultyButton filename={inputFilename} download_mp3={download_mp3} download_pdf={download_pdf} className="right-button" />
                             </div>
 
                         </div>
