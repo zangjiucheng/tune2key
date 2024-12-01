@@ -1,21 +1,39 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './UploadPage.css';
+import Upload2 from '../components/templates/Upload2';
+import DownloadButton from '../components/templates/buttons/DownloadButton';
 import MyToggleButton from '../components/templates/MyToggleButton';
+import './UploadPage.css';
+import Demos from '../components/templates/Demos';
 
-const UploadPage = ({ handleUploadSuccess }) => {
+const UploadPage = () => {
     const [uploaded, setUploaded] = useState(false);
     const [pdfUrl, setPdfUrl] = useState(null);
     const [audioUrl, setAudioUrl] = useState(null);
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentTime, setCurrentTime] = useState(0);
     const [duration, setDuration] = useState(0);
+    const [inputFilename, setInputFilename] = useState(null);
 
     const audioRef = useRef(null);
     const handleFileChange = (e) => {
-        const uploadedFile = e.target.files[0];
-        const formData = new FormData();
-        formData.append('file', uploadedFile);
-        transcribe(formData);
+        const uploadedFile = e.target.files[0]
+        if (!uploadedFile)
+            return false;
+
+        // force .mp3 or .midi or .pdf files only
+        const uploadedFilename = uploadedFile.name;
+        if (!uploadedFilename.includes('.'))
+            return false;
+        const fileExtension = uploadedFilename.split('.').pop();
+        if (fileExtension !== "mp3" && fileExtension !== "midi" && fileExtension !== "pdf") {
+            console.log(`${uploadedFilename} has .${fileExtension} extension, which is disallowed`);
+            return false;
+        }
+
+        const formData = new FormData()
+        formData.append('file', uploadedFile)
+        transcribe(formData)
+        setInputFilename(uploadedFilename);
     };
 
     const transcribe = async (formData) => {
@@ -28,7 +46,6 @@ const UploadPage = ({ handleUploadSuccess }) => {
             if (response.ok) {
                 console.log('ok');
                 setUploaded(true); // Set uploaded to true
-                handleUploadSuccess();
             }
         } catch (err) {
             console.log('err');
@@ -141,6 +158,7 @@ const UploadPage = ({ handleUploadSuccess }) => {
                     )}
                 </div>
                 <div className="right">
+
                     {audioUrl ? (
                         <div className="audio-section">
                             <div className="audio-player" onChange={() => { handlePlayPause(); console.log('playing') }}>
@@ -167,6 +185,13 @@ const UploadPage = ({ handleUploadSuccess }) => {
                             <div className="displayTime">
                                 <span>{formatTime(currentTime)}</span> / <span>{formatTime(duration)}</span>
                             </div>
+                            <div className="demos">
+                                <Demos setUploaded={setUploaded} download_pdf={download_pdf} download_mp3={download_mp3}/>
+                            </div>
+                            <div className="buttons">
+                                <DownloadButton inputFilename={inputFilename} className="left-button" />
+                                <DownloadButton inputFilename={inputFilename} className="right-button" />
+                            </div>
 
                         </div>
 
@@ -174,6 +199,7 @@ const UploadPage = ({ handleUploadSuccess }) => {
                         <p>Upload Something First!</p>
                     )}
                 </div>
+
             </div>
         </>
     );
