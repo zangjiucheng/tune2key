@@ -13,7 +13,16 @@ const UploadPage = () => {
                     <Upload2 setInputFilename={setInputFilename} />
                 </div>
                 <div className="right">
-                    <DownloadButton inputFilename={inputFilename}/>  
+                    <div className="play">
+
+                    </div>
+                    <div className="demos">
+
+                    </div>
+                    <div className="buttons">
+                        <DownloadButton inputFilename={inputFilename} className="left-button"/> 
+                        <DownloadButton inputFilename={inputFilename} className="right-button"/> 
+                    </div>
                 </div>
             </div>
         </>
