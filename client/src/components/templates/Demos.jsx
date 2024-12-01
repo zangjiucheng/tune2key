@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./Demos.css";
 
-const Demos = ({ setUploaded, download_pdf, download_mp3 }) => {
+const Demos = ({ setInputFilename, setUploaded, download_pdf, download_mp3 }) => {
     const [demoNumber, setDemoNumber] = useState(-1);
     useEffect(() => {
-        setUploaded(false);
         let filename;
         if (demoNumber === 1) {
             filename = "ROSÉ & Bruno Mars - APT";
@@ -16,15 +15,17 @@ const Demos = ({ setUploaded, download_pdf, download_mp3 }) => {
             console.warn("this isn't a proper demo number");
             return;
         }
+        setUploaded(true);
 
         console.debug("downloading " + filename);
         try {
-            download_pdf(filename + ".pdf");
-            download_mp3(filename + ".mp3");
+            console.log(filename, "filename in Demos")
+            download_pdf(filename);
+            download_mp3(filename);
         } catch (e) {
             console.error("error in calling in Demos: " + e)
         }
-        setUploaded(true);
+        setInputFilename(filename);
     }, [demoNumber])
 
     return (
