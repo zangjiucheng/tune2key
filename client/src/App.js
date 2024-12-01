@@ -1,11 +1,12 @@
-import { React, useState, useEffect } from 'react';
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import UploadPage from './pages/UploadPage'
-import MainPage from './pages/MainPage'
+import UploadPage from './pages/UploadPage';
+import MainPage from './pages/MainPage';
 
 import './App.css';
-import {BoxesCore} from './components/templates/BoxesCore';
-import Header from './components/Header'
+import { BoxesCore } from './components/templates/BoxesCore';
+import Header from './components/Header';
 
 function App() {
   const [inMp3Filename, setInMp3Filename] = useState(null); // the mp3 file that user gives
@@ -17,10 +18,11 @@ function App() {
 
 
   return (
-    <>
+    <div>
+      <BrowserRouter>
       <Header />
       <div className="app-container">
-        <div className='overlay' />
+        <div className="overlay" />
         <BoxesCore />
         <div className="content-container">
           {
@@ -30,8 +32,10 @@ function App() {
           }
         </div>
       </div>
-    </>
-  )
+    </BrowserRouter>
+    </div>
+    
+  );
 }
 
 export default App;

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './UploadPage.css'
+import Upload2 from '../components/templates/Upload2';
 
 import DownloadButton from '../components/templates/buttons/DownloadButton';
 
@@ -15,6 +16,7 @@ const UploadPage = ({mp3Filename}) => {
         <>
             <div className="main">
                 <div className="left">
+                    <Upload2 onUploadSuccess={handleUploadSuccess} />
                 </div>
                 <div className="right">
                     <DownloadButton filename={filename+".pdf"}/>

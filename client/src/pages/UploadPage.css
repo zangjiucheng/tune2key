@@ -4,13 +4,12 @@
     left: 4%;
     right: 4%;
     width: 92%;
-    height: 80%;
+    height: 75%;
     box-sizing: border-box;
     border: 1px solid white;
     display: flex;
     flex-direction: row;
     z-index: 10;
-
 }
 
 .left {
