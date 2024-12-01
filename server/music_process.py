@@ -73,7 +73,7 @@ def generate_sheet_pdf(input_path:str, output_pdf:str) -> None:
     try:
         subprocess.run(['mscore', '--version'], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     except subprocess.CalledProcessError:
-        raise EnvironmentError("MuseScore is not installed or not found in the system PATH, please install it fromhttps://musescore.org/en/download/musescore.dmg")
+        raise EnvironmentError("MuseScore is not installed or not found in the system PATH, please install it from https://musescore.org/en/download/musescore.dmg")
     try:
         process = subprocess.Popen(['mscore', input_path, '-o', output_pdf], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         stdout, stderr = process.communicate()

@@ -40,9 +40,9 @@ class TUNE2KEY:
             raise ValueError(f"Unsupported file type: {ext}")
     
     def process_mp3(self, file_path:str) -> None:
-        shutil.copy(file_path, self.music_dir)
         shutil.move(file_path, file_path.split('.')[0])
-        mp32midi(self.music_dir, self.midi_dir)
+        mp32midi(file_path.split('.')[0], self.midi_dir)
+        midi2mp3(self.midi_dir, self.music_dir)
         generate_sheet_pdf(self.midi_dir, self.music_sheet_dir)
         simplify_midi(self.midi_dir, self.music_sheet_simple_dir+".mid")
         generate_sheet_pdf(self.music_sheet_simple_dir+".mid", self.music_sheet_simple_dir+".pdf")
