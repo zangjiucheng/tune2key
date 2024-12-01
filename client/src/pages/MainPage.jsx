@@ -1,7 +1,7 @@
 import React from 'react';
 import './MainPage.css';
 import Upload2 from '../components/templates/Upload2';
-import Button from '../components/templates/Button';
+import Button from '../components/templates/Button'
 
 const MainPage = () => {
     return (
