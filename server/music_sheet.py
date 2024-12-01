@@ -29,9 +29,9 @@ class MUSIC_SHEET:
         self.transcribed_path = transcribe_audio(self.file_path)
     def process_midi(self):
         #do smt
-        print('hi')
+        print('process_midi')
     def process_pdf(self):
         #do smt
-        print('hi')
+        print('process_pdf')
     def get_transcribed_path(self):
         return self.transcribed_path
