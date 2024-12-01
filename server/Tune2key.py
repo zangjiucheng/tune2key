@@ -18,6 +18,7 @@ class TUNE2KEY:
         self.midi_dir = os.path.join(self.resource_dir, 'midi', f'{self.file_name}.mid')
         self.music_dir = os.path.join(self.resource_dir, 'mp3', f'{self.file_name}.mp3')
         self.music_sheet_dir = os.path.join(self.resource_dir, 'sheet', f'{self.file_name}.pdf')
+        self.music_sheet_simple_dir = os.path.join(self.resource_dir, 'simple_sheet', f'{self.file_name}.pdf')
         
         self.load_file_type(file_path) 
         
@@ -43,6 +44,8 @@ class TUNE2KEY:
         shutil.move(file_path, file_path.split('.')[0])
         mp32midi(self.music_dir, self.midi_dir)
         generate_sheet_pdf(self.midi_dir, self.music_sheet_dir)
+        simplify_midi(self.midi_dir, self.music_sheet_simple_dir+".mid")
+        generate_sheet_pdf(self.music_sheet_simple_dir+".mid", self.music_sheet_simple_dir+".pdf")
         os.remove(file_path.split('.')[0])
         
     def process_midi(self, file_path:str) -> None:
@@ -50,6 +53,8 @@ class TUNE2KEY:
         shutil.move(file_path, file_path.split('.')[0])
         midi2mp3(self.midi_dir)
         generate_sheet_pdf(self.midi_dir, self.music_sheet_dir)
+        simplify_midi(self.midi_dir, self.music_sheet_simple_dir+".mid")
+        generate_sheet_pdf(self.music_sheet_simple_dir+".mid", self.music_sheet_simple_dir+".pdf")
         os.remove(file_path.split('.')[0])
     
     def process_pdf(self):
@@ -62,3 +67,7 @@ class TUNE2KEY:
             os.remove(self.midi_dir)
         if self.music_sheet_dir:
             os.remove(self.music_sheet_dir)
+        if self.music_sheet_simple_dir+".mid":
+            os.remove(self.music_sheet_simple_dir+".mid")
+        if self.music_sheet_simple_dir+".pdf":
+            os.remove(self.music_sheet_simple_dir+".pdf")
