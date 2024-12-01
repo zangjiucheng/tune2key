@@ -1,23 +1,11 @@
 import React from 'react';
 import './Upload2.css'
 
-const Upload2 = ({ setInMp3Filename }) => {
-    
+const Upload2 = ({ handleUploadChange }) => {
+
 
     const handleFileChange = (e) => {
         const uploadedFile = e.target.files[0]
-        const uploadedFilename = uploadedFile.name;
-
-        // force .mp3 or .midi or .pdf files only
-        if (!uploadedFilename.includes('.'))
-            return false;
-        const fileExtension = uploadedFilename.split('.').pop();
-        if (fileExtension !== "mp3" && fileExtension !== "midi" && fileExtension !== "pdf") {
-            console.log(`${uploadedFilename} has .${fileExtension} extension, which is disallowed`);
-            return false;
-        }
-        setInMp3Filename(uploadedFilename);
-        
         const formData = new FormData()
         formData.append('file', uploadedFile)
         transcribe(formData)
@@ -30,10 +18,10 @@ const Upload2 = ({ setInMp3Filename }) => {
             })
             if (response.ok) {
                 console.log('ok')
+                handleUploadChange()
             }
         }
         catch (err) {
-            setInMp3Filename(null);
             console.log('err')
         }
     }

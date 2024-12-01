@@ -10,6 +10,9 @@ app = Flask(__name__)
 
 CORS(app)
 
+TUNE2KEY_obj = TUNE2KEY()
+
+base_path = os.path.join(os.path.dirname(__file__), 'resources')
 
 @app.route('/upload', methods=['POST'])
 def transcribe():
@@ -62,21 +65,6 @@ def music_sheet(name):
 @app.route('/audio/<name>', methods=['GET'])
 def audio(name):
     return os.path.join(base_path, 'mp3', f'{name}.mp3')
-
-# filename is the filename with ".pdf" ending
-@app.route('/download/<filename>', methods=['GET'])
-def download(filename):
-    try:
-        # Make sure the file exists
-        file_path = os.path.join(SHEET_MUSIC_FOLDER, filename)
-        if not os.path.exists(file_path):
-            return jsonify({"error": "File not found"}), 404
-        
-        # Send the file to the client
-        return send_from_directory(SHEET_MUSIC_FOLDER, filename, as_attachment=True, mimetype='application/pdf')
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-    
 
 if __name__ == "__main__":  
     app.run(debug=True)
