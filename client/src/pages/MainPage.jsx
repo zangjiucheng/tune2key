@@ -1,22 +1,21 @@
 import React from 'react';
-import { BoxesCore } from '../components/templates/BoxesCore';
 import './MainPage.css';
 import Upload2 from '../components/templates/Upload2';
+import Button from '../components/templates/Button'
 
-const MainPage = ( {handleUploadSuccess}) => {
+const MainPage = () => {
     return (
-        <div className="main-container">
-            <div className="overlay"></div>
-            <BoxesCore />
-            <div className="main-content">
-                <div className="main-heading">Welcome to Musium</div>
-                <p className="main-paragraph">
-                    Framer Motion is the best animation library ngl
-                </p>
-                <Upload2 onUploadSuccess={handleUploadSuccess} />
-            </div>
-
+        <div className="main-content">
+            <div className="main-heading">Welcome to Tune2Key</div>
+            <p className="main-paragraph">
+            Welcome to our innovative sheet music platform! Transform audio, MIDI, or PDF files into beautifully rendered sheet music with ease. 
+            Whether you're a beginner looking to simplify a piece or an expert aiming for a challenge, our AI-powered tool adjusts difficulty levels to match your needs. 
+            Perfect for musicians of all skill levels, our platform makes music creation and customization effortless.
+            </p>
+            <Button />
         </div>
+
+
     );
 };
 
