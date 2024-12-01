@@ -3,6 +3,7 @@ import Upload2 from '../components/templates/Upload2';
 import DownloadButton from '../components/templates/buttons/DownloadButton';
 import MyToggleButton from '../components/templates/MyToggleButton';
 import './UploadPage.css';
+import Demos from '../components/templates/Demos';
 
 const UploadPage = () => {
     const [uploaded, setUploaded] = useState(false);
@@ -185,6 +186,7 @@ const UploadPage = () => {
                                 <span>{formatTime(currentTime)}</span> / <span>{formatTime(duration)}</span>
                             </div>
                             <div className="demos">
+                                <Demos setUploaded={setUploaded}/>
                             </div>
                             <div className="buttons">
                                 <DownloadButton inputFilename={inputFilename} className="left-button" />
