@@ -59,9 +59,12 @@ const UploadPage = () => {
         }
     };
 
-    const download_pdf = async () => {
+    const download_pdf = async (_filename) => {
+        if (!_filename) {
+            return;
+        }
         try {
-            const response = await fetch(`http://127.0.0.1:5000/download/${fileName}.pdf`);
+            const response = await fetch(`http://127.0.0.1:5000/download/${_filename}.pdf`);
             if (response.ok) {
                 const blob = await response.blob();
                 const url = URL.createObjectURL(blob);
@@ -73,9 +76,9 @@ const UploadPage = () => {
             console.log('Error fetching PDF:', error);
         }
     };
-    const download_mp3 = async () => {
+    const download_mp3 = async (_filename) => {
         try {
-            const response = await fetch(`http://127.0.0.1:5000/download/${fileName}.mp3`);
+            const response = await fetch(`http://127.0.0.1:5000/download/${_filename}.mp3`);
             if (response.ok) {
                 const blob = await response.blob();
                 const url = URL.createObjectURL(blob);
@@ -90,8 +93,8 @@ const UploadPage = () => {
     // Use useEffect to call download_pdf when uploaded is true
     useEffect(() => {
         if (uploaded) {
-            download_pdf();
-            download_mp3();
+            download_pdf(fileName);
+            download_mp3(fileName);
         }
     }, [uploaded]);
 
@@ -192,7 +195,7 @@ const UploadPage = () => {
                                 <span>{formatTime(currentTime)}</span> / <span>{formatTime(duration)}</span>
                             </div>
                             <div className="demos">
-                                <Demos setUploaded={setUploaded} download_pdf={download_pdf} download_mp3={download_mp3}/>
+                                <Demos setInputFilename={setInputFilename} setUploaded={setUploaded} download_pdf={download_pdf} download_mp3={download_mp3}/>
                             </div>
                             <div className="buttons">
                                 <DownloadButton inputFilename={inputFilename} className="left-button" />
@@ -204,7 +207,7 @@ const UploadPage = () => {
                     ) : (
                         <>
                             <p>Don't have anything to upload? Play a demo!</p>
-                            <Demos setUploaded={setUploaded} download_pdf={download_pdf} download_mp3={download_mp3}/>
+                            <Demos setInputFilename={setInputFilename} setUploaded={setUploaded} download_pdf={download_pdf} download_mp3={download_mp3}/>
                         </>
                     )}
                 </div>
