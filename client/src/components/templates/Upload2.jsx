@@ -1,24 +1,38 @@
 import React from 'react';
 import './Upload2.css'
 
-const Upload2 = ({ handleUploadChange }) => {
+const Upload2 = ({ setInputFilename }) => {
 
 
     const handleFileChange = (e) => {
         const uploadedFile = e.target.files[0]
+        if (!uploadedFile)
+            return false;
+
+        // force .mp3 or .midi or .pdf files only
+        const uploadedFilename = uploadedFile.name;
+        if (!uploadedFilename.includes('.'))
+            return false;
+        const fileExtension = uploadedFilename.split('.').pop();
+        if (fileExtension !== "mp3" && fileExtension !== "midi" && fileExtension !== "pdf") {
+            console.log(`${uploadedFilename} has .${fileExtension} extension, which is disallowed`);
+            return false;
+        }
+
         const formData = new FormData()
         formData.append('file', uploadedFile)
         transcribe(formData)
+        setInputFilename(uploadedFilename);
+        console.debug(uploadedFilename, "inputFilename");
     }
     const transcribe = async (formData) => {
         try {
-            const response = await fetch('http://127.0.0.1:5000/transcribe', {
+            const response = await fetch('http://127.0.0.1:5000/upload', {
                 method: 'POST',
                 body: formData
             })
             if (response.ok) {
                 console.log('ok')
-                handleUploadChange()
             }
         }
         catch (err) {

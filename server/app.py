@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, request, jsonify, send_file
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 
 from Tune2key import TUNE2KEY
@@ -12,6 +12,9 @@ CORS(app)
 
 TUNE2KEY_obj = TUNE2KEY()
 base_path = os.path.join(os.path.dirname(__file__), 'resources')
+
+RESOURCES_DIR = './resources'
+SHEET_MUSIC_DIR = RESOURCES_DIR + "/sheet"
 
 @app.route('/upload', methods=['POST'])
 def transcribe():
@@ -64,6 +67,20 @@ def music_sheet(name):
 @app.route('/audio/<name>', methods=['GET'])
 def audio(name):
     return os.path.join(base_path, 'mp3', f'{name}.mp3')
+
+# downloads file from SHEET_MUSIC_DIR
+@app.route('/download/<filename>', methods=['GET'])
+def download(filename):
+    try:
+        file_path = os.path.join(SHEET_MUSIC_DIR, filename)
+        if not os.path.exists(file_path):
+            return jsonify({"error": "File not found"}), 404
+        
+        print("downloading " + filename)
+        
+        return send_from_directory(SHEET_MUSIC_DIR, filename, as_attachment=True, mimetype='application/pdf')
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":  
     app.run(debug=True)

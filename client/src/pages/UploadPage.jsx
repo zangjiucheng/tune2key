@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './UploadPage.css'
 import Upload2 from '../components/templates/Upload2';
+import DownloadButton from '../components/templates/buttons/DownloadButton';
 
-const UploadPage = ( { handleUploadSuccess } ) => {
+const UploadPage = () => {
+    const [inputFilename, setInputFilename] = useState(null);
+
     return (
         <>
             <div className="main">
                 <div className="left">
-                    <Upload2 onUploadSuccess={handleUploadSuccess} />
+                    <Upload2 setInputFilename={setInputFilename} />
                 </div>
                 <div className="right">
-                    hi
+                    <DownloadButton inputFilename={inputFilename}/>  
                 </div>
             </div>
         </>
@@ -18,3 +21,5 @@ const UploadPage = ( { handleUploadSuccess } ) => {
 }
 
 export default UploadPage;
+
+/*inputFilename */
