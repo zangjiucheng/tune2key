@@ -1,8 +1,8 @@
 import os
 
-from flask import Flask, request, jsonify, send_file
+from flask import Flask, request, jsonify, send_file, send_from_directory
 from flask_cors import CORS
-
+from make_music_harder import make_music_harder
 from Tune2key import TUNE2KEY
 from threading import Thread
 
@@ -11,6 +11,11 @@ app = Flask(__name__)
 CORS(app)
 
 TUNE2KEY_obj = TUNE2KEY()
+SHEET_MUSIC_FOLDER='./resources/sheet'
+SIMPLE='./resources/simple_sheet'
+AUDIO_FOLDER = './resources/mp3'
+HARDER = './resources/harder_sheet'
+
 base_path = os.path.join(os.path.dirname(__file__), 'resources')
 
 @app.route('/upload', methods=['POST'])
@@ -58,6 +63,68 @@ def process_status(name):
         return jsonify({"status": "processing"}), 200
     else:
         return jsonify({"status": "not_found"}), 404
+
+@app.route('/music_sheet/<name>', methods=['GET'])
+def music_sheet(name):
+    return os.path.join(base_path, 'sheet', f'{name}.pdf')
+
+@app.route('/audio/<name>', methods=['GET'])
+def audio(name):
+    return os.path.join(base_path, 'mp3', f'{name}.mp3')
+
+
+@app.route('/make-harder', methods=['POST'])
+def make_harder():
+    # Get the parameters from the request
+    difficulty_increase = float(request.form.get('difficulty_increase', 1.0))
+    ornamentation = int(request.form.get('ornamentation', 0))
+    midi_file = request.files['midi_file']
+
+    # Save the uploaded MIDI file
+    original_filename = midi_file.filename
+    midi_path = os.path.join(os.path.dirname(__file__), 'resources', 'midi', original_filename)
+    print(midi_path)
+    midi_file.save(midi_path)
+
+    # Call the function to make the music harder
+    new_midi_filename = make_music_harder(
+        difficulty_increase,
+        ornamentation,
+        './resources/midi/Victory.mid'
+    )
+# filename is the filename with ".pdf" ending
+
+@app.route('/download/<filename>', methods=['GET'])
+def download(filename):
+    try:
+        if filename.lower().endswith('simple.pdf'):
+            folder= SIMPLE
+            mimetype='application/pdf'
+        elif filename.lower().endswith('simple.mp3'):
+            folder=SIMPLE
+            mimetype='audio/mpeg'
+        elif filename.lower().endswith('harder.pdf'):
+            folder=HARDER
+            mimetype='application/pdf'
+        elif filename.lower().endswith('harder.mp3'):
+            folder=HARDER
+            mimetype='application/pdf'
+        # Make sure the file exists
+        elif filename.lower().endswith('.pdf'):
+            folder = SHEET_MUSIC_FOLDER
+            mimetype = 'application/pdf'
+        elif filename.lower().endswith('.mp3'):
+            folder = AUDIO_FOLDER
+            mimetype = 'audio/mpeg'
+        file_path = os.path.join(folder, filename)
+        print(file_path, 'file_path')
+        if not os.path.exists(file_path):
+            return jsonify({"error": "File not found"}), 404
+        
+        # Send the file to the client
+        return send_from_directory(folder, filename, as_attachment=True, mimetype=mimetype)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":  
     app.run(debug=True)
