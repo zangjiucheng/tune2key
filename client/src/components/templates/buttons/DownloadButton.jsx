@@ -28,7 +28,7 @@ const DownloadButton = ({filename}) => {
     }
 
     return (
-        <button id="download-button"
+        <button className="download-button"
             onClick={() => downloadFile()}>
             Download
         </button>
