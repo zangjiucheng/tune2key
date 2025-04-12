@@ -26,7 +26,7 @@
     width: 40%;
     height: 100%;
     box-sizing: border-box;
-    border: 1px solid white;
+    border: 2px solid white;
     padding: 2rem;
     gap: 0.8rem;
     background-color: rgba(255, 255, 255, 0.1);
@@ -44,7 +44,8 @@
 }
 
 .demos {
-    flex: 0.4;
+    height: 45vh;
+    margin: 15px 0;
 }
 
 .buttons {
@@ -53,6 +54,8 @@
     justify-content: space-between;
     align-items: center;
     gap: 0.8rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 .left-button, .right-button {
@@ -114,49 +117,72 @@
     color: white;
 }
 
+
 .slider {
-    /* slider */
     width: 100%;
     --slider-width: 60%;
-    --slider-height: 6px;
-    --slider-bg: rgb(82, 82, 82);
+    --slider-height: 8px;
+    --slider-bg: linear-gradient(90deg, #ff7eb3, #ff758c, #ff6a65);
     --slider-border-radius: 999px;
-    /* level */
     --level-color: #fff;
-    --level-transition-duration: .1s;
-    /* icon */
+    --level-transition-duration: 0.2s;
     --icon-margin: 15px;
     --icon-color: var(--slider-bg);
     --icon-size: 25px;
-    
+
     display: flex;
     justify-content: center;
+    align-items: center;
+    position: relative;
 }
 
 .slider .level {
-    -webkit-appearance: none;
-    -moz-appearance: none;
     appearance: none;
     width: var(--slider-width);
     height: var(--slider-height);
     background: var(--slider-bg);
-    overflow: hidden;
     border-radius: var(--slider-border-radius);
-    -webkit-transition: height var(--level-transition-duration);
-    -o-transition: height var(--level-transition-duration);
-    transition: height var(--level-transition-duration);
-    cursor: inherit;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: height var(--level-transition-duration), box-shadow var(--level-transition-duration);
 }
 
 .slider .level::-webkit-slider-thumb {
     -webkit-appearance: none;
-    width: 0;
-    height: 0;
-    -webkit-box-shadow: -200px 0 0 200px var(--level-color);
-    box-shadow: -200px 0 0 200px var(--level-color);
+    width: 15px;
+    height: 15px;
+    background: #fff;
+    border: 2px solid #ff6a65;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    cursor: grab;
+    transition: transform 0.2s ease-in-out;
+}
+
+.slider .level::-webkit-slider-thumb:active {
+    transform: scale(1.2);
+    cursor: grabbing;
 }
 
 .slider:hover .level {
     height: calc(var(--slider-height) * 2);
-    cursor: pointer;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.slider .level::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    background: #fff;
+    border: 2px solid #ff6a65;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    cursor: grab;
+    transition: transform 0.2s ease-in-out;
+}
+
+.slider .level::-moz-range-thumb:active {
+    transform: scale(1.2);
+    cursor: grabbing;
 }

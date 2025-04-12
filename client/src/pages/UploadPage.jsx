@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Upload2 from '../components/templates/Upload2';
 import DownloadButton from '../components/templates/buttons/DownloadButton';
 import EasyDifficultyButton from '../components/templates/buttons/EasyDifficultyButton';
 import MyToggleButton from '../components/templates/MyToggleButton';
@@ -196,7 +195,7 @@ const UploadPage = () => {
                                 <span>{formatTime(currentTime)}</span> / <span>{formatTime(duration)}</span>
                             </div>
                             <div className="demos">
-                                <Demos setInputFilename={setInputFilename} setUploaded={setUploaded} download_pdf={download_pdf} download_mp3={download_mp3}/>
+                                <Demos setInputFilename={setInputFilename} setUploaded={setUploaded} download_pdf={download_pdf} download_mp3={download_mp3} present={true} />
                             </div>
                             <div className="buttons">
                                 <DownloadButton inputFilename={inputFilename} className="left-button" />

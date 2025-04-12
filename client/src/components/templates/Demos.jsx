@@ -1,57 +1,56 @@
 import React, { useState, useEffect } from "react";
 import "./Demos.css";
 
-const Demos = ({ setInputFilename, setUploaded, download_pdf, download_mp3 }) => {
+const Demos = ({ setInputFilename, setUploaded, download_pdf, download_mp3, present=false }) => {
     const [demoNumber, setDemoNumber] = useState(-1);
+    const [songs, setSongs] = useState([]);
+
     useEffect(() => {
-        let filename;
-        if (demoNumber === 1) {
-            filename = "ROSÉ & Bruno Mars - APT";
-        } else if (demoNumber === 2) {
-            filename = "Two Steps From Hell - Star Sky (Piano Version)";
-        } else if (demoNumber === 3) {
-            filename = "PERFECT - ED SHEERAN (Piano Solo Cover) with a La La Land twist - The Piano Guys";
-        } else {
-            console.warn("this isn't a proper demo number");
+      fetch("http://127.0.0.1:5000/demos")
+        .then(response => response.json())
+        .then(data => setSongs(data))
+        .catch(error => console.error("Error fetching demos: ", error));
+    }, []);
+
+    useEffect(() => {
+        if (demoNumber === -1 || !songs[demoNumber - 1]) {
+            console.warn("Invalid demo number or no song selected");
             return;
         }
-        setUploaded(true);
 
+        const selectedSong = songs[demoNumber - 1];
+        const filename = selectedSong.filename;
+
+        setUploaded(true);
         console.debug("downloading " + filename);
+
         try {
-            console.log(filename, "filename in Demos")
+            console.log(filename, "filename in Demos");
             download_pdf(filename);
             download_mp3(filename);
         } catch (e) {
-            console.error("error in calling in Demos: " + e)
+            console.error("Error in Demos: " + e);
         }
+
         setInputFilename(filename);
     }, [demoNumber])
 
     return (
-        <div className="demo-container">
-            <div className="song-item">
-                <div className="song-info">
-                    <h2>APT</h2>
-                    <p>ROSÉ & Bruno Mars</p>
+        <div className={present ? "demo-container-present" : "demo-container"}>
+            {songs.map((song, index) => (
+                <div className="song-item" key={index}>
+                    <div className="song-info">
+                        <h2>{song.title}</h2>
+                        <p>{song.artist}</p>
+                    </div>
+                    <button
+                        className="play-button"
+                        onClick={() => setDemoNumber(index + 1)}
+                    >
+                        ▶
+                    </button>
                 </div>
-                <button className="play-button" onClick={() => setDemoNumber(1)}>▶</button>
-            </div>
-            <div className="song-item">
-                <div className="song-info">
-                    <h2>Star Sky</h2>
-                    <p>Two Steps From Hell</p>
-                </div>
-                <button className="play-button" onClick={() => setDemoNumber(2)}>▶</button>
-            </div>
-
-            <div className="song-item">
-                <div className="song-info">
-                    <h2>Perfect</h2>
-                    <p>Ed Sheeran</p>
-                </div>
-                <button className="play-button" onClick={() => setDemoNumber(3)}>▶</button>
-            </div>
+            ))}
         </div>
     );
 };

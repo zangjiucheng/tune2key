@@ -44,6 +44,26 @@ def transcribe():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500 
+
+@app.route('/demos', methods=['GET'])
+def get_demos():
+    demo_files = []
+    midi_dir = os.path.join(base_path, 'midi')
+    for filename in os.listdir(midi_dir):
+        if filename.endswith('.mid'):
+            base_name = filename.rsplit('.', 1)[0]
+            sheet_path = os.path.join(base_path, 'sheet', f'{base_name}.pdf')
+            mp3_path = os.path.join(base_path, 'mp3', f'{base_name}.mp3')
+            if os.path.exists(sheet_path) and os.path.exists(mp3_path):
+                demo_files.append(filename.rsplit('.', 1)[0])
+                parts = base_name.split("-", 1)
+                if len(parts) == 2:
+                    artist, title = parts[0].strip(), parts[1].strip()
+                else:
+                    artist, title = "", base_name.strip()
+                # Update the demo_files list with structured info
+                demo_files[-1] = {"filename": base_name, "title": title, "artist": artist}
+    return jsonify(demo_files), 200
     
 @app.route('/process/status/<name>', methods=['GET'])
 def process_status(name):
