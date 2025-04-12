@@ -3,8 +3,8 @@ import config as config
 import torch
 import numpy as np
 from piano_transcription_inference.utilities import RegressionPostProcessor, write_events_to_midi, load_audio
-from piano_transcription_inference.pytorch_utils import forward
-
+# from piano_transcription_inference.pytorch_utils import forward
+from tools.pytorch_utils import forward
 from .models import Regress_onset_offset_frame_velocity_CRNN, Note_pedal
 
 class PianoTranscription(object):
@@ -45,8 +45,7 @@ class PianoTranscription(object):
             self.model = torch.nn.DataParallel(self.model)
         else:
             print('Using CPU.')
-    
-    def transcribe(self, mp3_path, midi_path):
+    def transcribe(self, mp3_path, midi_path, progress_callback=None):
         """Transcribe an audio recording.
 
         Args:
@@ -74,7 +73,7 @@ class PianoTranscription(object):
         """(N, segment_samples)"""
 
         # Forward
-        output_dict = forward(self.model, segments, batch_size=1)
+        output_dict = forward(self.model, segments, batch_size=1, callback=progress_callback)
         """{'reg_onset_output': (N, segment_frames, classes_num), ...}"""
 
         # Deframe to original length

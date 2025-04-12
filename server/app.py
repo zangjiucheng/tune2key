@@ -65,6 +65,20 @@ def get_demos():
                 demo_files[-1] = {"filename": base_name, "title": title, "artist": artist}
     return jsonify(demo_files), 200
     
+@app.route('/process/progress', methods=['GET'])
+def process_progress():
+    total_segments = TUNE2KEY_obj.tracker.total_segments
+    pointer = TUNE2KEY_obj.tracker.pointer
+    if total_segments == 0:
+        return jsonify({"error": "No segments processed yet"}), 400
+    if pointer == 0:
+        return jsonify({"error": "No segments processed yet"}), 400
+    progress = {
+        "total_segments": total_segments,
+        "current_segment": pointer
+    }
+    return jsonify(progress), 200
+
 @app.route('/process/status/<name>', methods=['GET'])
 def process_status(name):
     upload_file_path = os.path.join(base_path, 'upload', name)

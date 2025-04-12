@@ -84,7 +84,7 @@ def generate_sheet_pdf(input_path:str, output_pdf:str) -> None:
     except (subprocess.CalledProcessError,RuntimeError) as e:
         raise RuntimeError(f"Failed to generate PDF: {e}")
 
-def mp32midi(mp3_path:str, midi_path:str) -> None:
+def mp32midi(mp3_path:str, midi_path:str, progress_callback=None) -> None:
     """Use AI to transcribe MP3 to MIDI file.
 
     Args:
@@ -95,7 +95,7 @@ def mp32midi(mp3_path:str, midi_path:str) -> None:
     transcriptor = PianoTranscription(device='cpu')    # 'cuda' | 'cpu' | 'mps'
 
     # Transcribe and write out to MIDI file
-    transcriptor.transcribe(mp3_path, midi_path)
+    transcriptor.transcribe(mp3_path, midi_path, progress_callback)
     
 def play_midi(midi_path:str) -> None:
     """ Play MIDI file and convert to WAV file.

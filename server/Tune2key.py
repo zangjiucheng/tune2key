@@ -3,6 +3,16 @@ import shutil
 
 from music_process import *
 
+class ProgressTracker:
+    def __init__(self):
+        self.pointer = 0
+        self.total_segments = 0
+
+    def track_progress(self, pointer, total_segments):
+        self.pointer = pointer
+        self.total_segments = total_segments
+        print(f"Processing segment {pointer}/{total_segments}")
+
 class TUNE2KEY:
     def __init__(self) -> None:
         self.resource_dir = os.path.join(os.path.dirname(__file__), 'resources')
@@ -11,6 +21,8 @@ class TUNE2KEY:
         self.midi_dir = None
         self.music_dir = None
         self.music_sheet_dir = None
+        
+        self.tracker = ProgressTracker()
         
     def upload_file(self, file_path:str) -> None:
         self.file_name = os.path.basename(file_path).split('.')[0]
@@ -41,7 +53,7 @@ class TUNE2KEY:
     
     def process_mp3(self, file_path:str) -> None:
         shutil.move(file_path, file_path.split('.')[0])
-        mp32midi(file_path.split('.')[0], self.midi_dir)
+        mp32midi(file_path.split('.')[0], self.midi_dir, self.tracker.track_progress)
         midi2mp3(self.midi_dir, self.music_dir)
         generate_sheet_pdf(self.midi_dir, self.music_sheet_dir)
         simplify_midi(self.midi_dir, self.music_sheet_simple_dir+".mid")
