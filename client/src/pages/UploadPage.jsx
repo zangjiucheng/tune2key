@@ -172,6 +172,13 @@ const UploadPage = () => {
 
                     {audioUrl ? (
                         <div className="audio-section">
+
+                            <div className="audio-name">
+                                {inputFilename  ? (
+                                <span>{inputFilename || "No audio selected"}</span>
+                                ) : null}
+                            </div>
+
                             <div className="audio-player" onChange={() => { handlePlayPause(); console.log('playing') }}>
                                 <audio
                                     ref={audioRef}

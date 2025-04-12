@@ -8,6 +8,14 @@
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     border: 2px solid rgba(0, 0, 255, 0.3); 
     overflow-y: auto;
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none; /* For Internet Explorer and Edge */
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.demo-container::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Opera */
     max-height: 100vh;
 }
 
@@ -21,6 +29,15 @@
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     border: 2px solid rgba(0, 0, 255, 0.3); 
     overflow-y: auto;
+    max-height: 100vh;
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none; /* For Internet Explorer and Edge */
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.demo-container-present::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Opera */
     max-height: 100vh;
 }
 

@@ -4,7 +4,7 @@
     left: 4%;
     right: 4%;
     width: 92%;
-    height: 75%;
+    height: 80%;
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
@@ -53,7 +53,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 0.8rem;
+    gap: 5rem;
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
@@ -117,10 +117,18 @@
     color: white;
 }
 
+.audio-name {
+    font-size: 20px;
+    font-weight: 500;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-family: 'Cursive', 'Comic Sans MS', sans-serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
 
 .slider {
     width: 100%;
-    --slider-width: 60%;
+    --slider-width: 80%;
     --slider-height: 8px;
     --slider-bg: linear-gradient(90deg, #ff7eb3, #ff758c, #ff6a65);
     --slider-border-radius: 999px;

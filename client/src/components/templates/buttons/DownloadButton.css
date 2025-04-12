@@ -2,13 +2,14 @@
     width: 50%;
     height: 62px;
     cursor: pointer;
-    color: #fff;
+    color: #100720;
     font-size: 17px;
     border-radius: 1rem;
     border: none;
     position: relative;
-    background: #100720;
+    background: #fff;
     transition: 0.1s;
+    padding: 5px 20px;
 }
 
 .download-button::after {
