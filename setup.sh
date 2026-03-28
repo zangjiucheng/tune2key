@@ -4,4 +4,4 @@
 pip install -r requirements.txt
 
 # Run download.py
-python3 download.py
+python3 download_model.py
